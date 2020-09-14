@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse
 from .models import details
 import psycopg2
 from django.contrib import messages
@@ -33,18 +33,3 @@ def check_mail_id():
     return rows
 def dindex(request):
     return render(request,"index.html")
-def fform1(request):
-    return render(request,"fform1.html")
-def mform1(request):
-    mail = request.POST.get('mail')
-    ids = check_mail_id()
-    temp = 0
-    i = len(ids)
-    for j in range(i):
-        if (mail == ids[j][0]):
-            return render(request,"mform1.html")
-        else:
-            temp = temp + 1
-    if(temp == i):      
-        messages.error(request,"kindly check your Mail ID\nThis mail id is ot registered ")
-        return render(request,"fform1.html")
